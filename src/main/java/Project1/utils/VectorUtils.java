@@ -16,7 +16,7 @@ public class VectorUtils {
      *
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
-     * @return Wynik dodawania dwóch wektorow
+     * @return Wynik dodawania dwoch wektorow
      */
     public double[] addVectors(double[] vec0, double[] vec1){
         return new double[]{
@@ -47,7 +47,7 @@ public class VectorUtils {
      *
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
-     * @return Wynik odejmowania dwóch wektorow
+     * @return Wynik odejmowania dwoch wektorow
      */
     public double[] subtractVectors(double[] vec0, double[] vec1){
         return new double[]{
@@ -58,7 +58,7 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda zwracajaca długosc wektora
+     * Metoda zwracajaca dlugosc wektora
      *
      * @param vec0 - Wektor 1
      * @return Dlugosc wektora
@@ -70,11 +70,11 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda przemnazająca wektor przez wartosc stała
+     * Metoda przemnazajaca wektor przez wartosc stala
      *
-     * @param constance - wartosc stała
+     * @param constance - wartosc stala
      * @param vec0      - Wektor 1
-     * @return Wynik przemnozenia wektora przez stała
+     * @return Wynik przemnozenia wektora przez stala
      */
     public double[] multipleByConst(double constance, double[] vec0){
         return new double[]{
@@ -85,7 +85,7 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda losujaca wektor składajacy się z +/- 1
+     * Metoda losujaca wektor skladajacy sie z +/- 1
      *
      * @return Wektor double [ ]
      */
@@ -103,7 +103,7 @@ public class VectorUtils {
      * Metoda zwracajaca losowa wartosc energii kinetycznej
      *
      * @param k   - Stala Boltzmana
-     * @param T_0 - Temperatura poczatkowa układu
+     * @param T_0 - Temperatura poczatkowa ukladu
      * @return Losowa wartosc energii kinetycznej
      */
     public double getRandomKineticEnergy(double k, double T_0){
@@ -111,10 +111,10 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda obliczająca średnią oraz odchylenie standarowe na podstawie danej listy
+     * Metoda obliczajaca srednia oraz odchylenie standarowe na podstawie danej listy
      *
      * @param list - Uniwersalna lista danych
-     * @return Tablica [0] - wartość średnia, [1] - odchylenie standardowe
+     * @return Tablica [0] - wartosc srednia, [1] - odchylenie standardowe
      */
     public static double[] averageAndStd(List<Double> list){
         final double srednia =  list.stream().mapToDouble(e -> e).sum() / (double) list.size();

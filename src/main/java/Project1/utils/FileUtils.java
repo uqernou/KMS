@@ -77,7 +77,7 @@ public class FileUtils {
      *
      * @param path    - Sciezka zapisu pliku
      * @param T       - Lista temperatur
-     * @param V       - Lista potencjałow
+     * @param V       - Lista potencjalow
      * @param p       - Lista pedow
      * @param t       - Lista czasow tau
      * @param counter - Licznik
