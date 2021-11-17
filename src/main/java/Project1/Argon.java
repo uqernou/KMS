@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Główna klasa do generowania symulacji
+ * Glowna klasa do generowania symulacji
  */
 @Data
 @NoArgsConstructor
@@ -33,7 +33,7 @@ public class Argon {
     private String pathToCharacteristic = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane" + File.separator + "characteristic_";
 
     /**
-     * Metoda głowna do symulacji.
+     * Metoda glowna do symulacji.
      * @param args  - Argumenty programu
      */
     public static void main(String[] args){

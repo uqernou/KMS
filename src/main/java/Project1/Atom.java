@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasa reprezentująca atom Argonu
+ * Klasa reprezentujaca atom Argonu
  */
 @Data
 @NoArgsConstructor

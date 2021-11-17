@@ -24,9 +24,9 @@ public class FileUtils {
     private static BufferedWriter writer;
 
     /**
-     * Metoda pobierająca parametry z pliku wejściowego
+     * Metoda pobierajaca parametry z pliku wejsciowego
      * @param fileName - Nazwa pliku umieszczonego w programie
-     * @return Tablica parametrów podczytana z pliku
+     * @return Tablica parametrow podczytana z pliku
      */
     public double[] loadParams(String fileName){
         double[] params = new double[SIZE];
@@ -47,9 +47,9 @@ public class FileUtils {
 
 
     /**
-     * Metoda zapisująca położenie XYZ wszystkich atomów do danego kroku czasowego
-     * @param path    - Ścieżka zapisu pliku
-     * @param atoms   - Lista atomów
+     * Metoda zapisujaca polozenie XYZ wszystkich atomow do danego kroku czasowego
+     * @param path    - Sciezka zapisu pliku
+     * @param atoms   - Lista atomow
      * @param step    - Krok czasowy symulacji
      * @param counter - Licznik
      */
@@ -71,12 +71,12 @@ public class FileUtils {
     }
 
     /**
-     * Metoda zapisująca charaketrystyki do pliku
-     * @param path    - Ścieżka zapisu pliku
+     * Metoda zapisujaca charaketrystyki do pliku
+     * @param path    - Sciezka zapisu pliku
      * @param T       - Lista temperatur
-     * @param V       - Lista potencjałów
-     * @param p       - Lista pędów
-     * @param t       - Lista czasów tau
+     * @param V       - Lista potencjałow
+     * @param p       - Lista pedow
+     * @param t       - Lista czasow tau
      * @param counter - Licznik
      */
     public void saveCharacteristics(String path, List<Double> T, List<Double> V, List<Double> p, List<Double> t, int counter){

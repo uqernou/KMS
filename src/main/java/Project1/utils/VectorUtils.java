@@ -12,10 +12,10 @@ import java.util.List;
 public class VectorUtils {
 
     /**
-     * Metoda dodająca dwa wektory do siebie
+     * Metoda dodajaca dwa wektory do siebie
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
-     * @return Wynik dodawania dwóch wektorów
+     * @return Wynik dodawania dwóch wektorow
      */
     public double[] addVectors(double[] vec0, double[] vec1){
         return new double[]{
@@ -26,11 +26,11 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda dodająca trzy wektory do siebie
+     * Metoda dodajaca trzy wektory do siebie
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
      * @param vec2 - Wektor 3
-     * @return Wynik dodawania trzech wektorów
+     * @return Wynik dodawania trzech wektorow
      */
     public double[] addThreeVectors(double[] vec0, double[] vec1, double[] vec2){
         return new double[]{
@@ -41,10 +41,10 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda odejmująca dwa wektory do siebie
+     * Metoda odejmujaca dwa wektory do siebie
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
-     * @return Wynik odejmowania dwóch wektorów
+     * @return Wynik odejmowania dwóch wektorow
      */
     public double[] subtractVectors(double[] vec0, double[] vec1){
         return new double[]{
@@ -55,9 +55,9 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda zwracająca długość wektora
+     * Metoda zwracajaca długosc wektora
      * @param vec0 - Wektor 1
-     * @return Długość wektora
+     * @return Dlugosc wektora
      */
     public double lenghtVector(double[] vec0){
         return Math.sqrt(
@@ -66,10 +66,10 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda przemnażająca wektor przez wartość stałą
-     * @param constance - wartość stała
+     * Metoda przemnazająca wektor przez wartosc stała
+     * @param constance - wartosc stała
      * @param vec0      - Wektor 1
-     * @return Wynik przemnożenia wektora przez stałą
+     * @return Wynik przemnozenia wektora przez stała
      */
     public double[] multipleByConst(double constance, double[] vec0){
         return new double[]{
@@ -80,7 +80,7 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda losująca wektor składający się z +/- 1
+     * Metoda losujaca wektor składajacy się z +/- 1
      * @return Wektor
      */
     public double[] randomSignUnitVector(){
@@ -94,10 +94,10 @@ public class VectorUtils {
     }
 
     /**
-     * Metoda zwracająca losową wartość energii kinetycznej
-     * @param k   - Stała Boltzmana
-     * @param T_0 - Temperatura początkowa układu
-     * @return Losowa wartość energii kinetycznej
+     * Metoda zwracajaca losowa wartosc energii kinetycznej
+     * @param k   - Stala Boltzmana
+     * @param T_0 - Temperatura poczatkowa układu
+     * @return Losowa wartosc energii kinetycznej
      */
     public double getRandomKineticEnergy(double k, double T_0){
         return - (1.0 / 2.0) * k * T_0 * Math.log(Math.random());
