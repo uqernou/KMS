@@ -10,7 +10,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Główna klasa do generowania symulacji
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +32,10 @@ public class Argon {
     private String pathToXYZ = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane" + File.separator + "data_";
     private String pathToCharacteristic = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane" + File.separator + "characteristic_";
 
+    /**
+     * Metoda głowna do symulacji.
+     * @param args  - Argumenty programu
+     */
     public static void main(String[] args){
 
         long startTime = System.currentTimeMillis();
@@ -123,9 +129,9 @@ public class Argon {
 
                     double[] kierunekPedu = VectorUtils.randomSignUnitVector();
                     double[] p = {
-                            kierunekPedu[0] * Math.sqrt(2.0 * m * FileUtils.getRandomKineticEnergy(this.k_B, this.T_0)),
-                            kierunekPedu[1] * Math.sqrt(2.0 * m * FileUtils.getRandomKineticEnergy(this.k_B, this.T_0)),
-                            kierunekPedu[2] * Math.sqrt(2.0 * m * FileUtils.getRandomKineticEnergy(this.k_B, this.T_0))
+                            kierunekPedu[0] * Math.sqrt(2.0 * m * VectorUtils.getRandomKineticEnergy(this.k_B, this.T_0)),
+                            kierunekPedu[1] * Math.sqrt(2.0 * m * VectorUtils.getRandomKineticEnergy(this.k_B, this.T_0)),
+                            kierunekPedu[2] * Math.sqrt(2.0 * m * VectorUtils.getRandomKineticEnergy(this.k_B, this.T_0))
                     };
                     atoms.get(i_x).getR().add(r);
                     atoms.get(i_x).getP().add(p);
@@ -140,17 +146,17 @@ public class Argon {
 
             for(int j = i + 1; j < this.atoms.size(); j++){
 
-//                V += V_ij(this.atoms.get(i), this.atoms.get(j), step);
-//
-//                double[] Fp = Fp_i(this.atoms.get(i), this.atoms.get(j), step);
-//
-//                this.atoms.get(i).getF().get(step)[0] += Fp[0];
-//                this.atoms.get(i).getF().get(step)[1] += Fp[1];
-//                this.atoms.get(i).getF().get(step)[2] += Fp[2];
-//
-//                this.atoms.get(j).getF().get(step)[0] -= Fp[0];
-//                this.atoms.get(j).getF().get(step)[1] -= Fp[1];
-//                this.atoms.get(j).getF().get(step)[2] -= Fp[2];
+                V += V_ij(this.atoms.get(i), this.atoms.get(j), step);
+
+                double[] Fp = Fp_i(this.atoms.get(i), this.atoms.get(j), step);
+
+                this.atoms.get(i).getF().get(step)[0] += Fp[0];
+                this.atoms.get(i).getF().get(step)[1] += Fp[1];
+                this.atoms.get(i).getF().get(step)[2] += Fp[2];
+
+                this.atoms.get(j).getF().get(step)[0] -= Fp[0];
+                this.atoms.get(j).getF().get(step)[1] -= Fp[1];
+                this.atoms.get(j).getF().get(step)[2] -= Fp[2];
             }
 
             V += Vs_ri(this.atoms.get(i), step);
@@ -228,9 +234,9 @@ public class Argon {
             );
             a.getP().add(pi_next);
         });
-//        System.out.println((H_i(step)+"").replace(".", ","));
-//        System.out.println("T(" + step + ") = " + T_i(step));
-//        System.out.println((this.tau*step + " " + H_i(step)).replace(".", ","));
+        System.out.println((H_i(step)+"").replace(".", ","));
+        System.out.println("T(" + step + ") = " + T_i(step));
+        System.out.println((this.tau*step + " " + H_i(step)).replace(".", ","));
         this.H.add(H_i(step));
     }
 
@@ -256,14 +262,6 @@ public class Argon {
 
     private void initForce(){
         this.atoms.forEach(e -> e.getF().add(new double[] {0.0, 0.0, 0.0}));
-    }
-
-    public static double[] averageAndStd(List<Double> list){
-        final double srednia =  list.stream().mapToDouble(e -> e).sum() / (double) list.size();
-        final double variance = Math.sqrt(1.0 / (double) list.size()
-                * list.stream().mapToDouble(e -> Math.pow(e - srednia, 2)).sum());
-
-        return new double[] {srednia, variance};
     }
 
 }

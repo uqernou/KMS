@@ -13,6 +13,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Klasa Utilsowa do operacji na plikach
+ */
 @UtilityClass
 public class FileUtils {
 
@@ -20,6 +23,11 @@ public class FileUtils {
     private static int SIZE = 13;
     private static BufferedWriter writer;
 
+    /**
+     * Metoda pobierająca parametry z pliku wejściowego
+     * @param fileName - Nazwa pliku umieszczonego w programie
+     * @return Tablica parametrów podczytana z pliku
+     */
     public double[] loadParams(String fileName){
         double[] params = new double[SIZE];
         File file = new File("src" + File.separator + fileName);
@@ -37,10 +45,14 @@ public class FileUtils {
         return params;
     }
 
-    public double getRandomKineticEnergy(double k, double T_0){
-        return - (1.0 / 2.0) * k * T_0 * Math.log(Math.random());
-    }
 
+    /**
+     * Metoda zapisująca położenie XYZ wszystkich atomów do danego kroku czasowego
+     * @param path    - Ścieżka zapisu pliku
+     * @param atoms   - Lista atomów
+     * @param step    - Krok czasowy symulacji
+     * @param counter - Licznik
+     */
     public void saveXYZ(String path, List<Atom> atoms, int step, int counter){
         try {
             writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);
@@ -58,6 +70,15 @@ public class FileUtils {
         }
     }
 
+    /**
+     * Metoda zapisująca charaketrystyki do pliku
+     * @param path    - Ścieżka zapisu pliku
+     * @param T       - Lista temperatur
+     * @param V       - Lista potencjałów
+     * @param p       - Lista pędów
+     * @param t       - Lista czasów tau
+     * @param counter - Licznik
+     */
     public void saveCharacteristics(String path, List<Double> T, List<Double> V, List<Double> p, List<Double> t, int counter){
         try {
             writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);
