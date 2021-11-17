@@ -25,6 +25,7 @@ public class FileUtils {
 
     /**
      * Metoda pobierajaca parametry z pliku wejsciowego
+     *
      * @param fileName - Nazwa pliku umieszczonego w programie
      * @return Tablica parametrow podczytana z pliku
      */
@@ -48,6 +49,7 @@ public class FileUtils {
 
     /**
      * Metoda zapisujaca polozenie XYZ wszystkich atomow do danego kroku czasowego
+     *
      * @param path    - Sciezka zapisu pliku
      * @param atoms   - Lista atomow
      * @param step    - Krok czasowy symulacji
@@ -72,6 +74,7 @@ public class FileUtils {
 
     /**
      * Metoda zapisujaca charaketrystyki do pliku
+     *
      * @param path    - Sciezka zapisu pliku
      * @param T       - Lista temperatur
      * @param V       - Lista potencjałow

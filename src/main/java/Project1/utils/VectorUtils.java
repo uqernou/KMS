@@ -13,6 +13,7 @@ public class VectorUtils {
 
     /**
      * Metoda dodajaca dwa wektory do siebie
+     *
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
      * @return Wynik dodawania dwóch wektorow
@@ -27,6 +28,7 @@ public class VectorUtils {
 
     /**
      * Metoda dodajaca trzy wektory do siebie
+     *
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
      * @param vec2 - Wektor 3
@@ -42,6 +44,7 @@ public class VectorUtils {
 
     /**
      * Metoda odejmujaca dwa wektory do siebie
+     *
      * @param vec0 - Wektor 1
      * @param vec1 - Wektor 2
      * @return Wynik odejmowania dwóch wektorow
@@ -56,6 +59,7 @@ public class VectorUtils {
 
     /**
      * Metoda zwracajaca długosc wektora
+     *
      * @param vec0 - Wektor 1
      * @return Dlugosc wektora
      */
@@ -67,6 +71,7 @@ public class VectorUtils {
 
     /**
      * Metoda przemnazająca wektor przez wartosc stała
+     *
      * @param constance - wartosc stała
      * @param vec0      - Wektor 1
      * @return Wynik przemnozenia wektora przez stała
@@ -81,7 +86,8 @@ public class VectorUtils {
 
     /**
      * Metoda losujaca wektor składajacy się z +/- 1
-     * @return Wektor
+     *
+     * @return Wektor double [ ]
      */
     public double[] randomSignUnitVector(){
         double plus = 1.0;
@@ -95,6 +101,7 @@ public class VectorUtils {
 
     /**
      * Metoda zwracajaca losowa wartosc energii kinetycznej
+     *
      * @param k   - Stala Boltzmana
      * @param T_0 - Temperatura poczatkowa układu
      * @return Losowa wartosc energii kinetycznej
@@ -105,6 +112,7 @@ public class VectorUtils {
 
     /**
      * Metoda obliczająca średnią oraz odchylenie standarowe na podstawie danej listy
+     *
      * @param list - Uniwersalna lista danych
      * @return Tablica [0] - wartość średnia, [1] - odchylenie standardowe
      */

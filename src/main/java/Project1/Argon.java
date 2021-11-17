@@ -34,7 +34,8 @@ public class Argon {
 
     /**
      * Metoda glowna do symulacji.
-     * @param args  - Argumenty programu
+     *
+     * @param args - Argumenty programu
      */
     public static void main(String[] args){
 
