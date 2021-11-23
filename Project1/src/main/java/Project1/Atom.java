@@ -1,4 +1,4 @@
-package Project1;
+package main.java.Project1;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

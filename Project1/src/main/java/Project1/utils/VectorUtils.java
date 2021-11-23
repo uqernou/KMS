@@ -1,4 +1,4 @@
-package Project1.utils;
+package main.java.Project1.utils;
 
 
 import lombok.experimental.UtilityClass;

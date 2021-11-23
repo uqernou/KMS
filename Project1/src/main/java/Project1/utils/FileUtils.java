@@ -1,6 +1,6 @@
-package Project1.utils;
+package main.java.Project1.utils;
 
-import Project1.Atom;
+import main.java.Project1.Atom;
 import lombok.experimental.UtilityClass;
 
 import java.io.BufferedWriter;

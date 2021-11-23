@@ -1,7 +1,7 @@
-package Project1;
+package main.java.Project1;
 
-import Project1.utils.FileUtils;
-import Project1.utils.VectorUtils;
+import main.java.Project1.utils.FileUtils;
+import main.java.Project1.utils.VectorUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
