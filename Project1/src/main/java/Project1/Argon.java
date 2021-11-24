@@ -21,6 +21,7 @@ public class Argon {
     private double n, m, e, R, f, L, a, T_0, tau, S_o, S_d, S_out, S_xyz;
     private double N;
 
+    private final int SIZE = 13;
     private final double k_B = 8.31e-3;   // [J/K]
     private double[] b_0 = new double[3], b_1 = new double[3], b_2 = new double[3];
     private List<Atom> atoms = new ArrayList<>();
@@ -73,7 +74,7 @@ public class Argon {
     }
 
     private void initParams(String fileName){
-        double[] parameters = FileUtils.loadParams(fileName);
+        double[] parameters = FileUtils.loadParams(fileName, SIZE);
 
         n = parameters[0];
         m = parameters[1];

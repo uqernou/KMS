@@ -111,5 +111,5 @@ ani = animation.FuncAnimation(fig, update, repeat=True, frames=409, interval=50,
 f = r"C:\Users\uqern\Desktop\KMS\Dane\animation_2000k.gif"
 writergif = animation.PillowWriter(fps=30)
 ani.save(f, writer=writergif)
-#
-# plt.show()
+
+plt.show()

@@ -1,6 +1,5 @@
-package main.java.Project1.utils;
+package main.java.Project2.utils;
 
-import main.java.Project1.Atom;
 import lombok.experimental.UtilityClass;
 
 import java.io.BufferedWriter;
@@ -21,20 +20,21 @@ public class FileUtils {
 
     private static Scanner scanner;
     private static BufferedWriter writer;
+    private static final String path = "C:\\Users\\uqern\\IdeaProjects\\KMS\\Project2\\parametry2.txt";
 
     /**
      * Metoda pobierajaca parametry z pliku wejsciowego
      *
-     * @param fileName - Nazwa pliku umieszczonego w programie
+     * @param nrOfParams - Liczba parametrow do wczytania
      * @return Tablica parametrow podczytana z pliku
      */
-    public double[] loadParams(String fileName, int SIZE){
-        double[] params = new double[SIZE];
-        File file = new File("src" + File.separator + fileName);
+    public double[] loadParams(int nrOfParams) {
+        double[] params = new double[nrOfParams];
+        File file = new File(path);
         try {
             scanner = new Scanner(file);
             int i = 0;
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 String dane = scanner.nextLine();
                 params[i] = Double.parseDouble(dane.substring(0, dane.indexOf("#") - 1));
                 i++;
@@ -45,57 +45,37 @@ public class FileUtils {
         return params;
     }
 
-
-    /**
-     * Metoda zapisujaca polozenie XYZ wszystkich atomow do danego kroku czasowego
-     *
-     * @param path    - Sciezka zapisu pliku
-     * @param atoms   - Lista atomow
-     * @param step    - Krok czasowy symulacji
-     * @param counter - Licznik
-     */
-    public void saveXYZ(String path, List<Atom> atoms, int step, int counter){
+    public void saveRho(String path, List<Double> x_k, List<Double>[] rho, int counter) {
         try {
             writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);
-            atoms.forEach(atom -> {
+            for (int i = 0; i < rho[counter].size(); i++) {
                 try {
-                    writer.write(atom.getR().get(step)[0] + " " + atom.getR().get(step)[1] + " " + atom.getR().get(step)[2]);
-                    writer.newLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            writer.flush();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Metoda zapisujaca charaketrystyki do pliku
-     *
-     * @param path    - Sciezka zapisu pliku
-     * @param T       - Lista temperatur
-     * @param V       - Lista potencjalow
-     * @param p       - Lista pedow
-     * @param t       - Lista czasow tau
-     * @param counter - Licznik
-     */
-    public void saveCharacteristics(String path, List<Double> T, List<Double> V, List<Double> p, List<Double> t, int counter){
-        try {
-            writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);
-            for(int i = 0; i < t.size(); i++) {
-                try {
-                    writer.write(t.get(i) + " " + T.get(i) + " " + p.get(i) + " " + V.get(i));
+                    writer.write(x_k.get(i) + " " + rho[counter].get(i));
                     writer.newLine();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             writer.flush();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void saveCharacteristic(String path, List<Double> t, List<Double>[] param, int counter) {
+        try {
+            writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);
+            for (int i = 0; i < counter; i++) {
+                try {
+                    writer.write(t.get(i) + " " + param[i].get(0) + " " + param[i].get(1) + " " + param[i].get(2));
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
