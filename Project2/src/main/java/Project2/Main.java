@@ -20,13 +20,13 @@ public class Main {
     private final int SIZE = 4;
     private static final double PI = Math.PI;
     private double N, k, o, dX, tau, n;
-    private double dTau = 0.0001000251;
+    private double dTau = 0.0001;
     List<Double> x_k = new ArrayList<>();
     List<Double> time = new ArrayList<>();
-    List<Number>[] Psi = new ArrayList[4000];
-    List<Number>[] H = new ArrayList[4000];
-    List<Double>[] rho = new ArrayList[4000];
-    List<Double>[] params = new ArrayList[4000];
+    List<Number>[] Psi = new ArrayList[5000];
+    List<Number>[] H = new ArrayList[5000];
+    List<Double>[] rho = new ArrayList[5000];
+    List<Double>[] params = new ArrayList[5000];
 
     private String pathToRho = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane2" + File.separator + "characteristic_";
     private String pathToData = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane2" + File.separator + "data_";
@@ -91,13 +91,14 @@ public class Main {
         calcRho(0);
         calcParams(0);
         time.add(0.0);
-        for (int i = 1; i < 4000; i++) {
+        for (int i = 1; i < 5000; i++) {
             time.add(i * dTau);
             initPsiInTime(i);
             obliczPsi(i);
             calcRho(i);
             calcParams(i);
         }
+        FileUtils.saveCharacteristic(pathToData, time, params, 4999);
     }
 
     private void obliczPsi(int step) {
@@ -151,9 +152,15 @@ public class Main {
         double N = dX * Psi[step].stream().mapToDouble(i ->
                 (Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2))
         ).sum();
-        double x = dX * Psi[step].stream().mapToDouble(i ->
-                (x_k.get(Psi[step].indexOf(i))) * (Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2))
-        ).sum();
+        List<Double> list = new ArrayList<>();
+        Psi[step].forEach(i -> {
+            list.add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
+        });
+        double x = 0;
+        for(int i = 0; i < x_k.size(); i++){
+            x += x_k.get(i) * list.get(i);
+        }
+        x = dX * x;
         double E = dX * Psi[step].stream().mapToDouble(i -> (
                   (i.getComplexPart() * H[step].get(Psi[step].indexOf(i)).getComplexPart())
                 + (i.getRealPart() * H[step].get(Psi[step].indexOf(i)).getRealPart())
@@ -175,6 +182,19 @@ public class Main {
 //            }
         });
 //        System.out.println(data);
-//        FileUtils.saveRho(pathToRho, x_k, rho, step);
+        FileUtils.saveRho(pathToRho, x_k, rho, step);
     }
 }
+/**
+ *         List<Double> list = new ArrayList<>();
+ *         Psi[step].forEach(i -> {
+ *             list.add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
+ *         });
+ *         double sum = list.stream().mapToDouble(i -> i).sum();
+ *         double N = dX * sum;
+ *         double x = 0;
+ *         for(int i = 0; i < x_k.size(); i++){
+ *             x += x_k.get(i) * list.get(i);
+ *         }
+ *         x = dX * x;
+ */
