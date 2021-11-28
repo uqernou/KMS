@@ -23,10 +23,10 @@ public class Main {
     private double dTau = 0.0001;
     List<Double> x_k = new ArrayList<>();
     List<Double> time = new ArrayList<>();
-    List<Number>[] Psi = new ArrayList[5000];
-    List<Number>[] H = new ArrayList[5000];
-    List<Double>[] rho = new ArrayList[5000];
-    List<Double>[] params = new ArrayList[5000];
+    List<Number>[] Psi = new ArrayList[455000];
+    List<Number>[] H = new ArrayList[455000];
+    List<Double>[] rho = new ArrayList[455000];
+    List<Double>[] params = new ArrayList[455000];
 
     private String pathToRho = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane2" + File.separator + "characteristic_";
     private String pathToData = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane2" + File.separator + "data_";
@@ -47,7 +47,8 @@ public class Main {
         double[] parameters = FileUtils.loadParams(SIZE);
         N = parameters[0];
         k = parameters[1];
-        o = parameters[2];
+//        o = parameters[2];
+        o = 8.0 * PI / 2.0 ;
         n = parameters[3];
         dX = 1.0 / N;
     }
@@ -91,14 +92,14 @@ public class Main {
         calcRho(0);
         calcParams(0);
         time.add(0.0);
-        for (int i = 1; i < 5000; i++) {
+        for (int i = 1; i < 455000; i++) {
             time.add(i * dTau);
             initPsiInTime(i);
             obliczPsi(i);
             calcRho(i);
             calcParams(i);
         }
-        FileUtils.saveCharacteristic(pathToData, time, params, 4999);
+        FileUtils.saveCharacteristic(pathToData, time, params, 454999);
     }
 
     private void obliczPsi(int step) {
@@ -168,33 +169,16 @@ public class Main {
         params[step].add(N);
         params[step].add(x);
         params[step].add(E);
-//        System.out.println((E + "").replace(".", ","));
 //        FileUtils.saveCharacteristic(pathToData, time, params, step);
     }
 
     private void calcRho(int step){
         rho[step] = new ArrayList<>();
-//        StringBuilder data = new StringBuilder();
         Psi[step].forEach(i -> {
             rho[step].add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
-//            if(Psi[step].indexOf(i) % 2 == 0){
-//                data.append((rho[step].get(Psi[step].indexOf(i)) + " ").replace(".", ","));
-//            }
         });
-//        System.out.println(data);
+        if(step == 454000)
         FileUtils.saveRho(pathToRho, x_k, rho, step);
     }
 }
-/**
- *         List<Double> list = new ArrayList<>();
- *         Psi[step].forEach(i -> {
- *             list.add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
- *         });
- *         double sum = list.stream().mapToDouble(i -> i).sum();
- *         double N = dX * sum;
- *         double x = 0;
- *         for(int i = 0; i < x_k.size(); i++){
- *             x += x_k.get(i) * list.get(i);
- *         }
- *         x = dX * x;
- */
+

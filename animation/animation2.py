@@ -36,6 +36,7 @@ ax2 = fig.add_subplot(1, 2, 1)
 wykres5 = ax2.plot(list(map(float, x)), list(map(float, rho)), c='black', label='Gęstość prawdopodobieństwa')
 ax2.set_ylabel(r'$\rho$')
 plt.xlabel('$x_k$')
+plt.title("Symulacja dla n = 4")
 
 def update(i):
     print(i)
@@ -64,7 +65,6 @@ def update(i):
     wykres1 = ax1.plot(list(map(float, time)), list(map(float, norma)), c='green', label='Norma')
     wykres2 = ax3.plot(list(map(float, time)), list(map(float, polozenie_sr)), c='yellow', label='Średnie położenie')
     wykres3 = ax4.plot(list(map(float, time)), list(map(float, energia)), c='orange', label='Energia')
-
 
 
 figure = plt.gcf()
