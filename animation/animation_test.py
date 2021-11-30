@@ -61,10 +61,10 @@ def update(i):
 
     x = [x2[a] for a in range(i+100)]
     rho = [rho2[a] for a in range(i+100)]
-    time = [time2[a] for a in range(i+153990)]
-    norma = [norma2[a] for a in range(i+153990)]
-    polozenie_sr = [polozenie_sr2[a] for a in range(i+153990)]
-    energia = [energia2[a] for a in range(i+153990)]
+    time = [time2[a] for a in range(i+5990)]
+    norma = [norma2[a] for a in range(i+5990)]
+    polozenie_sr = [polozenie_sr2[a] for a in range(i+5990)]
+    energia = [energia2[a] for a in range(i+5990)]
 
     wykres5 = ax2.plot(list(map(float, x)), list(map(float, rho)), c='black', label='Gęstość prawdopodobieństwa')
     wykres1 = ax1.plot(list(map(float, time)), list(map(float, norma)), c='green', label='Norma')

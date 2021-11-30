@@ -92,14 +92,13 @@ public class Main {
         calcRho(0);
         calcParams(0);
         time.add(0.0);
-        for (int i = 1; i < 455000; i++) {
+        for (int i = 1; i < 6000; i++) {
             time.add(i * dTau);
             initPsiInTime(i);
             obliczPsi(i);
             calcRho(i);
             calcParams(i);
         }
-        FileUtils.saveCharacteristic(pathToData, time, params, 454999);
     }
 
     private void obliczPsi(int step) {
@@ -169,7 +168,7 @@ public class Main {
         params[step].add(N);
         params[step].add(x);
         params[step].add(E);
-//        FileUtils.saveCharacteristic(pathToData, time, params, step);
+        FileUtils.saveCharacteristic(pathToData, time, params, step);
     }
 
     private void calcRho(int step){
@@ -177,7 +176,6 @@ public class Main {
         Psi[step].forEach(i -> {
             rho[step].add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
         });
-        if(step == 454000)
         FileUtils.saveRho(pathToRho, x_k, rho, step);
     }
 }
