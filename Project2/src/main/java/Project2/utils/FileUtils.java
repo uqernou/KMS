@@ -45,6 +45,14 @@ public class FileUtils {
         return params;
     }
 
+    /**
+     * Save rho.
+     *
+     * @param path    the path
+     * @param x_k     the x k
+     * @param rho     the rho
+     * @param counter the counter
+     */
     public void saveRho(String path, List<Double> x_k, List<Double>[] rho, int counter) {
         try {
             writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);
@@ -62,6 +70,14 @@ public class FileUtils {
         }
     }
 
+    /**
+     * Save characteristic.
+     *
+     * @param path    the path
+     * @param t       the t
+     * @param param   the param
+     * @param counter the counter
+     */
     public void saveCharacteristic(String path, List<Double> t, List<Double>[] param, int counter) {
         try {
             writer = Files.newBufferedWriter(Paths.get(path + counter + ".txt"), StandardOpenOption.CREATE);

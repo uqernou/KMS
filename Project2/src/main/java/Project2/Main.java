@@ -22,20 +22,52 @@ public class Main {
     private double N, k, o, dX, tau, n;
     private double dTau = 0.0001;
     private static final int time_step = 210000;
+    /**
+     * The X k.
+     */
     List<Double> x_k = new ArrayList<>();
+    /**
+     * The Time.
+     */
     List<Double> time = new ArrayList<>();
+    /**
+     * The Psi.
+     */
     List<Number>[] Psi = new ArrayList[time_step];
+    /**
+     * The H.
+     */
     List<Number>[] H = new ArrayList[time_step];
+    /**
+     * The Rho.
+     */
     List<Double>[] rho = new ArrayList[time_step];
+    /**
+     * The Params.
+     */
     List<Double>[] params = new ArrayList[time_step];
+    /**
+     * The Omega.
+     */
     double omega[] = {3.0 * Math.pow(PI, 2) / 2.0, 5.0 * Math.pow(PI, 2) / 2.0, 8.0 * Math.pow(PI, 2) / 2.0};
+    /**
+     * The Kappa.
+     */
     int kappa[] = {2, 4, 10};
+    /**
+     * The Number.
+     */
     int number[] = {1, 4, 9};
 
     private String pathToRho = "C:" + File.separator + "Users" + File.separator + "uqern" + File.separator + "Desktop" + File.separator + "KMS_symulacje" + File.separator;
     private String pathToData = "C:" + File.separator + "Users" + File.separator + "uqern" + File.separator + "Desktop" + File.separator + "KMS_symulacje" + File.separator;
 
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         long startTime2 = System.currentTimeMillis();
