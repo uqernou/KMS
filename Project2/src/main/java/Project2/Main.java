@@ -21,35 +21,47 @@ public class Main {
     private static final double PI = Math.PI;
     private double N, k, o, dX, tau, n;
     private double dTau = 0.0001;
+    private static final int time_step = 210000;
     List<Double> x_k = new ArrayList<>();
     List<Double> time = new ArrayList<>();
-    List<Number>[] Psi = new ArrayList[455000];
-    List<Number>[] H = new ArrayList[455000];
-    List<Double>[] rho = new ArrayList[455000];
-    List<Double>[] params = new ArrayList[455000];
+    List<Number>[] Psi = new ArrayList[time_step];
+    List<Number>[] H = new ArrayList[time_step];
+    List<Double>[] rho = new ArrayList[time_step];
+    List<Double>[] params = new ArrayList[time_step];
+    double omega[] = {3.0 * Math.pow(PI, 2) / 2.0, 5.0 * Math.pow(PI, 2) / 2.0, 8.0 * Math.pow(PI, 2) / 2.0};
+    int kappa[] = {2, 4, 10};
+    int number[] = {1, 4, 9};
 
-    private String pathToRho = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane2" + File.separator + "characteristic_";
-    private String pathToData = "C:"+ File.separator +"Users"+ File.separator +"uqern"+ File.separator +"Desktop" + File.separator + "KMS" + File.separator + "Dane2" + File.separator + "data_";
+    private String pathToRho = "C:" + File.separator + "Users" + File.separator + "uqern" + File.separator + "Desktop" + File.separator + "KMS_symulacje" + File.separator;
+    private String pathToData = "C:" + File.separator + "Users" + File.separator + "uqern" + File.separator + "Desktop" + File.separator + "KMS_symulacje" + File.separator;
 
 
     public static void main(String[] args) {
 
-        long startTime = System.currentTimeMillis();
+        long startTime2 = System.currentTimeMillis();
 
         Main main = new Main();
-        main.symulacja();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    long startTime = System.currentTimeMillis();
+                    main.symulacja(i, j, k);
+                    System.out.println("n_" + main.number[i] + "_o_" + j + "_k_" + main.kappa[k]);
+                    System.out.println("Execution time in milliseconds: " + (System.currentTimeMillis() - startTime));
+                }
+            }
+        }
 
-        System.out.println("Execution time in milliseconds: " + (System.currentTimeMillis() - startTime));
+        System.out.println("Execution FULL time in milliseconds: " + (System.currentTimeMillis() - startTime2));
 
     }
 
-    private void initParams() {
+    private void initParams(int nn, int oo, int kk) {
         double[] parameters = FileUtils.loadParams(SIZE);
         N = parameters[0];
-        k = parameters[1];
-//        o = parameters[2];
-        o = 8.0 * PI / 2.0 ;
-        n = parameters[3];
+        n = this.number[nn];
+        o = this.omega[oo];
+        k = this.kappa[kk];
         dX = 1.0 / N;
     }
 
@@ -85,20 +97,22 @@ public class Main {
         }
     }
 
-    private void symulacja() {
-        initParams();
+    private void symulacja(int nn, int oo, int kk) {
+        initParams(nn, oo, kk);
         initX_k();
+        generateFolderName(nn, oo, kk);
         initPsiAndH((int) n);
         calcRho(0);
         calcParams(0);
         time.add(0.0);
-        for (int i = 1; i < 6000; i++) {
+        for (int i = 1; i < time_step; i++) {
             time.add(i * dTau);
             initPsiInTime(i);
             obliczPsi(i);
             calcRho(i);
             calcParams(i);
         }
+        resetData();
     }
 
     private void obliczPsi(int step) {
@@ -147,7 +161,7 @@ public class Main {
         H[step] = new ArrayList<>();
     }
 
-    private void calcParams(int step){
+    private void calcParams(int step) {
         params[step] = new ArrayList<>();
         double N = dX * Psi[step].stream().mapToDouble(i ->
                 (Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2))
@@ -157,26 +171,44 @@ public class Main {
             list.add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
         });
         double x = 0;
-        for(int i = 0; i < x_k.size(); i++){
+        for (int i = 0; i < x_k.size(); i++) {
             x += x_k.get(i) * list.get(i);
         }
         x = dX * x;
         double E = dX * Psi[step].stream().mapToDouble(i -> (
-                  (i.getComplexPart() * H[step].get(Psi[step].indexOf(i)).getComplexPart())
-                + (i.getRealPart() * H[step].get(Psi[step].indexOf(i)).getRealPart())
+                (i.getComplexPart() * H[step].get(Psi[step].indexOf(i)).getComplexPart())
+                        + (i.getRealPart() * H[step].get(Psi[step].indexOf(i)).getRealPart())
         )).sum();
         params[step].add(N);
         params[step].add(x);
         params[step].add(E);
-        FileUtils.saveCharacteristic(pathToData, time, params, step);
+        if (step % 200000 == 0 && step != 0)
+            FileUtils.saveCharacteristic(pathToData, time, params, step);
     }
 
-    private void calcRho(int step){
+    private void calcRho(int step) {
         rho[step] = new ArrayList<>();
         Psi[step].forEach(i -> {
             rho[step].add(Math.pow(i.getComplexPart(), 2) + Math.pow(i.getRealPart(), 2));
         });
-        FileUtils.saveRho(pathToRho, x_k, rho, step);
+        if (step % 10 == 0)
+            FileUtils.saveRho(pathToRho, x_k, rho, step);
+    }
+
+    private void generateFolderName(int nn, int oo, int kk) {
+        this.pathToData = "C:" + File.separator + "Users" + File.separator + "uqern" + File.separator + "Desktop" + File.separator + "KMS_symulacje" + File.separator +
+                "n_" + this.number[nn] + "_o_" + oo + "_k_" + this.kappa[kk] + File.separator + "data_";
+        this.pathToRho = "C:" + File.separator + "Users" + File.separator + "uqern" + File.separator + "Desktop" + File.separator + "KMS_symulacje" + File.separator +
+                "n_" + this.number[nn] + "_o_" + oo + "_k_" + this.kappa[kk] + File.separator + "characteristic_";
+    }
+
+    private void resetData() {
+        x_k = new ArrayList<>();
+        time = new ArrayList<>();
+        Psi = new ArrayList[time_step];
+        H = new ArrayList[time_step];
+        rho = new ArrayList[time_step];
+        params = new ArrayList[time_step];
     }
 }
 

@@ -1,4 +1,4 @@
 100 # N
-3 # kappa
+2 # kappa
 0 # omega
 1 # n
